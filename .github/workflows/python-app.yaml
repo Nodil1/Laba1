@@ -1,0 +1,34 @@
+name: Laba1
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install
+      run: |
+        pip install flake8
+        pip install pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    - name: Test
+      run: |
+        pytest
