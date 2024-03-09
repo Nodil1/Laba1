@@ -18,7 +18,7 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: 
-            name/app
+            nodil1/Laba1
         tags: |
           type=semantic
           format=semver
@@ -37,5 +37,5 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ steps.extract-metadata.outputs.tags }}
-        labels: ${{ steps.extract-metadata.outputs.labels }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
