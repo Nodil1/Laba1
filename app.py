@@ -14,7 +14,7 @@ def get_weather():
     data = response.json()
     weather_description = data['weather'][0]['description']
     temperature = data['main']['temp']
-    return jsonify({'city': city, 'weather': weather_description, 'temperature': temperature})
+    return jsonify({'city': city, 'weather': weather_description})
 
 
 if __name__ == '__main__':
